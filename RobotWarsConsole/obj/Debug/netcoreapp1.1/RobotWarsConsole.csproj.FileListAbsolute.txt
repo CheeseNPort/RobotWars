@@ -1,0 +1,11 @@
+c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWarsConsole\bin\Debug\netcoreapp1.1\RobotWarsConsole.deps.json
+c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWarsConsole\bin\Debug\netcoreapp1.1\RobotWarsConsole.runtimeconfig.json
+c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWarsConsole\bin\Debug\netcoreapp1.1\RobotWarsConsole.runtimeconfig.dev.json
+c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWarsConsole\bin\Debug\netcoreapp1.1\RobotWarsConsole.dll
+c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWarsConsole\bin\Debug\netcoreapp1.1\RobotWarsConsole.pdb
+c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWarsConsole\bin\Debug\netcoreapp1.1\RobotWars.dll
+c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWarsConsole\bin\Debug\netcoreapp1.1\RobotWars.pdb
+c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWarsConsole\obj\Debug\netcoreapp1.1\RobotWarsConsole.csprojResolveAssemblyReference.cache
+c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWarsConsole\obj\Debug\netcoreapp1.1\RobotWarsConsole.AssemblyInfo.cs
+c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWarsConsole\obj\Debug\netcoreapp1.1\RobotWarsConsole.dll
+c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWarsConsole\obj\Debug\netcoreapp1.1\RobotWarsConsole.pdb
