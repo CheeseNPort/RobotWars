@@ -1,6 +1,0 @@
-c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWars\bin\Debug\netcoreapp1.1\RobotWars.deps.json
-c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWars\bin\Debug\netcoreapp1.1\RobotWars.dll
-c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWars\bin\Debug\netcoreapp1.1\RobotWars.pdb
-c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWars\obj\Debug\netcoreapp1.1\RobotWars.AssemblyInfo.cs
-c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWars\obj\Debug\netcoreapp1.1\RobotWars.dll
-c:\users\michael.moore\documents\visual studio 2017\Projects\RobotWars\RobotWars\obj\Debug\netcoreapp1.1\RobotWars.pdb
