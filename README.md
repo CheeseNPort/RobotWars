@@ -1,5 +1,5 @@
 # RobotWars
-Robot wars is a class library which allows you to build your own implementation of a code based robot to fight in a war with either the built in robots or against any number of robots you define.
+Robot wars is a class library which allows you to build your own implementation of a code based robot to fight in a war with either the built in robots or against any number of robots you define. The basic game works by each robot being given 100 health points to start with and in turn they make up to 10 attacks on any combination of their competitors. Each attack they make deducts a health point off their competitors and then it moves onto the next robot.
 
 ## IRobot
 The console application shows an example of how a war can be fort. To get started, create your own implementation of IRobot in the robots folder and run the console application to see how it stands up against the example robots.
