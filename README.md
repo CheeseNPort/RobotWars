@@ -1,8 +1,10 @@
 # RobotWars
 Robot wars is a class library which allows you to build your own implementation of a code based robot to fight in a war with either the built in robots or against any number of robots you define.
+
 #IRobot
 The console application shows an example of how a war can be fort. To get started, create your own implementation of IRobot in the robots folder and run the console application to see how it stands up against the example robots.
 The method you need to programme your logic in is MyTurn. This provides you with a list of competitors and their current health status. From this you can ammend the attacks property of each to state how many points you want to deduct off them. This can be a maximum of 10 points across all robots. MyTurn is executed for each robot in sequence so will continue to be called until your robot is out or you win.
+
 #Example Robots
 The included example robots are:
 BullyRobot - He's a bully because each turn he picks the com[etitor with the least health and deducts a further 10 off them.
