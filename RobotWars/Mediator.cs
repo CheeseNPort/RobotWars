@@ -11,11 +11,12 @@ namespace RobotWars
 
         public Mediator()
         {
+            var tempRobots = new List<Robot>();
             var robots = Assembly.GetEntryAssembly().DefinedTypes.Where(type => type.ImplementedInterfaces.Contains(typeof(IRobot))).ToList();
             robots.ForEach(robot =>
             {
                 var iRobot = (IRobot)Activator.CreateInstance(robot.AsType());
-                Robots.Add(new Robot
+                tempRobots.Add(new Robot
                 {
                     Health = 100,
                     RobotImplementation = iRobot,
@@ -24,11 +25,38 @@ namespace RobotWars
                     LastTurn = DateTime.Now
                 });
             });
+            var random = new Random();
+            while (tempRobots.Count > 0)
+            {
+                var index = random.Next(0, tempRobots.Count - 1);
+                Robots.Add(tempRobots[index]);
+                tempRobots.Remove(tempRobots[index]);
+            }
+        }
+
+        public Mediator(List<IRobot> robots)
+        {
+            var tempRobots = robots.Select(r => new Robot
+            {
+                Health = 100,
+                RobotImplementation = r,
+                Id = Guid.NewGuid(),
+                LastTurn = DateTime.Now,
+                Name = r.GetName()
+            }).ToList();
+
+            var random = new Random();
+            while(tempRobots.Count > 0)
+            {
+                var index = random.Next(0, tempRobots.Count - 1);
+                Robots.Add(tempRobots[index]);
+                tempRobots.Remove(tempRobots[index]);
+            }
         }
 
         public void NextTurn()
         {
-            var robot = Robots.OrderBy(r => r.LastTurn).FirstOrDefault();
+            var robot = Robots.Where(r => r.Health > 0).OrderBy(r => r.LastTurn).FirstOrDefault();
             var competitors = Robots.Where(r => r.Health > 0 && r.Id != robot.Id).Select(r => new RobotAction
             {
                 Health = r.Health,

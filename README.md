@@ -13,3 +13,6 @@ The included example robots are:
 - LazyRobot - He's lazy because he doesn't really have a brain. He just picks a random competitor and deducts 10 points off him.
 - StupidRobot - He's stupid because he picks a random competitor and deducts only 6 points off him, therefore not using the maximum attacks available to him.
 - VeryStupidRobot - He's very stupid because similar to StupidRobot he doesn't use his maximum attacks, he only uses 3 per turn!
+
+## Unit Test
+A simple unit test is included to quickly simulate 1000 wars.
