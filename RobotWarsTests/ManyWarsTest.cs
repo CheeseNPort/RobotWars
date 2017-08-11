@@ -13,21 +13,7 @@ namespace RobotWarsTests
         [TestMethod]
         public void TestMethod1()
         {
-            var results = new List<WarResults>()
-            {
-                new WarResults { Name = "Bully Robot", Wins = 0},
-                new WarResults { Name = "Cheating Robot", Wins = 0},
-                new WarResults { Name = "Compassionate Robot", Wins = 0},
-                new WarResults { Name = "Lazy Robot", Wins = 0},
-                new WarResults { Name = "Michael", Wins = 0},
-                new WarResults { Name = "Stupid Robot", Wins = 0},
-                new WarResults { Name = "Very Stupid Robot", Wins = 0}
-            };
-
-            for (int i = 0; i < 1000; i++)
-            {
-                var robotsOut = new List<Guid>();
-                var war = new Mediator(new List<IRobot>()
+            var robots = new List<IRobot>()
                 {
                     new BullyRobot(),
                     new CheatingRobot(),
@@ -36,7 +22,18 @@ namespace RobotWarsTests
                     new Michael(),
                     new StupidRobot(),
                     new VeryStupidRobot()
-                });
+                };
+
+            var results = robots.Select(r => new WarResults
+            {
+                Name = r.GetName(),
+                Wins = 0
+            }).ToList();
+
+            for (int i = 0; i < 1000; i++)
+            {
+                var robotsOut = new List<Guid>();
+                var war = new Mediator(robots);
 
                 while (war.Robots.Count(robot => robot.Health > 0) > 1)
                 {
@@ -53,7 +50,8 @@ namespace RobotWarsTests
                     });
                 }
 
-                results.SingleOrDefault(r => r.Name == war.Robots.SingleOrDefault(b => b.Health > 0).Name).Wins++;
+                var winningRobot = war.Robots.Where(b => b.Health > 0).SingleOrDefault();
+                results.SingleOrDefault(r => r.Name == winningRobot.Name).Wins++;
             }
 
             var a = results;

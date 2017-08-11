@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 
 namespace RobotWars
 {
@@ -16,7 +17,7 @@ namespace RobotWars
             robots.ForEach(robot =>
             {
                 var iRobot = (IRobot)Activator.CreateInstance(robot.AsType());
-                tempRobots.Add(new Robot
+                Robots.Add(new Robot
                 {
                     Health = 100,
                     RobotImplementation = iRobot,
@@ -25,18 +26,12 @@ namespace RobotWars
                     LastTurn = DateTime.Now
                 });
             });
-            var random = new Random();
-            while (tempRobots.Count > 0)
-            {
-                var index = random.Next(0, tempRobots.Count - 1);
-                Robots.Add(tempRobots[index]);
-                tempRobots.Remove(tempRobots[index]);
-            }
+            RandomizeStartOrder();
         }
 
         public Mediator(List<IRobot> robots)
         {
-            var tempRobots = robots.Select(r => new Robot
+            Robots = robots.Select(r => new Robot
             {
                 Health = 100,
                 RobotImplementation = r,
@@ -44,11 +39,20 @@ namespace RobotWars
                 LastTurn = DateTime.Now,
                 Name = r.GetName()
             }).ToList();
+            RandomizeStartOrder();
+        }
+
+        public void RandomizeStartOrder()
+        {
+            var tempRobots = Robots.Select(r => r).ToList();
+            Robots.Clear();
 
             var random = new Random();
-            while(tempRobots.Count > 0)
+            while (tempRobots.Count > 0)
             {
-                var index = random.Next(0, tempRobots.Count - 1);
+                var min = 0;
+                var max = tempRobots.Count();
+                var index = random.Next(min, max);
                 Robots.Add(tempRobots[index]);
                 tempRobots.Remove(tempRobots[index]);
             }
