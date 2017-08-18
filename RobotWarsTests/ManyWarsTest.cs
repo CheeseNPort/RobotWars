@@ -3,7 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using RobotWars;
 using System.Linq;
-using RobotWarsTests.Robots;
+using RobotsStore.Robots;
+using RobotsStore;
 
 namespace RobotWarsTests
 {
@@ -13,16 +14,7 @@ namespace RobotWarsTests
         [TestMethod]
         public void TestMethod1()
         {
-            var robots = new List<IRobot>()
-                {
-                    new BullyRobot(),
-                    new CheatingRobot(),
-                    new CompassionateRobot(),
-                    new LazyRobot(),
-                    new Michael(),
-                    new StupidRobot(),
-                    new VeryStupidRobot()
-                };
+            var robots = CompetitorsFactory.GetCompetitors();
 
             var results = robots.Select(r => new WarResults
             {
@@ -54,7 +46,7 @@ namespace RobotWarsTests
                 results.SingleOrDefault(r => r.Name == winningRobot.Name).Wins++;
             }
 
-            var a = results;
+            var a = results.OrderByDescending(r => r.Wins).ToList();
         }
     }
 

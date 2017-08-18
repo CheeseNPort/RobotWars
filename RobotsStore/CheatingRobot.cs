@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RobotWarsTests.Robots
+namespace RobotsStore.Robots
 {
     public class CheatingRobot : IRobot
     {

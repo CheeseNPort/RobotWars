@@ -9,25 +9,7 @@ namespace RobotWars
     public class Mediator
     {
         public List<Robot> Robots { get; set; } = new List<Robot>();
-
-        public Mediator()
-        {
-            var tempRobots = new List<Robot>();
-            var robots = Assembly.GetEntryAssembly().DefinedTypes.Where(type => type.ImplementedInterfaces.Contains(typeof(IRobot))).ToList();
-            robots.ForEach(robot =>
-            {
-                var iRobot = (IRobot)Activator.CreateInstance(robot.AsType());
-                Robots.Add(new Robot
-                {
-                    Health = 100,
-                    RobotImplementation = iRobot,
-                    Id = Guid.NewGuid(),
-                    Name = iRobot.GetName(),
-                    LastTurn = DateTime.Now
-                });
-            });
-            RandomizeStartOrder();
-        }
+        public Int64 TurnCounter { get; set; } = 0;
 
         public Mediator(List<IRobot> robots)
         {
@@ -51,7 +33,7 @@ namespace RobotWars
             while (tempRobots.Count > 0)
             {
                 var min = 0;
-                var max = tempRobots.Count();
+                var max = tempRobots.Count;
                 var index = random.Next(min, max);
                 Robots.Add(tempRobots[index]);
                 tempRobots.Remove(tempRobots[index]);
@@ -60,6 +42,11 @@ namespace RobotWars
 
         public void NextTurn()
         {
+            if(TurnCounter == Robots.Count)
+            {
+                Robots.ForEach(r => { r.LastTurn = new DateTime(1900, 1, 1); });
+                RandomizeStartOrder();
+            }
             var robot = Robots.Where(r => r.Health > 0).OrderBy(r => r.LastTurn).FirstOrDefault();
             var competitors = Robots.Where(r => r.Health > 0 && r.Id != robot.Id).Select(r => new RobotAction
             {
@@ -101,6 +88,8 @@ namespace RobotWars
             });
 
             robot.LastTurn = DateTime.Now;
+
+            TurnCounter++;
         }
     }
 }

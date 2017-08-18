@@ -4,21 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RobotWarsConsole.Robots
+namespace RobotsStore.Robots
 {
-    public class CompassionateRobot : IRobot
+    public class VeryStupidRobot : IRobot
     {
         public Int64 Health { get; set; }
 
         public string GetName()
         {
-            return "Compassionate Robot";
+            return "Very Stupid Robot";
         }
 
         public List<RobotAction> MyTurn(List<RobotAction> competitors)
         {
-            var victim = competitors.OrderByDescending(c => c.Health).FirstOrDefault();
-            victim.Attacks = 10;
+            var random = new Random();
+            var victim = competitors[random.Next(0, competitors.Count - 1)];
+            victim.Attacks = 3;
             return competitors;
         }
 

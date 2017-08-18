@@ -1,4 +1,6 @@
-﻿using RobotWars;
+﻿using RobotsStore;
+using RobotsStore.Robots;
+using RobotWars;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +13,15 @@ namespace RobotWarsConsole
         {
             var robotsOut = new List<Guid>();
             Console.ForegroundColor = ConsoleColor.White;
-            var war = new Mediator();
-            while(war.Robots.Count(robot => robot.Health > 0) > 1)
+            var war = new Mediator(CompetitorsFactory.GetCompetitors());
+            while (war.Robots.Count(robot => robot.Health > 0) > 1)
             {
                 war.NextTurn();
                 war.Robots.OrderBy(robot => robot.Name).ToList().ForEach(robot =>
                 {
-                    if(robot.Health <= 0)
+                    if (robot.Health <= 0)
                     {
-                        if(!robotsOut.Contains(robot.Id))
+                        if (!robotsOut.Contains(robot.Id))
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine($"{robot.Name} is out! :(");
@@ -33,7 +35,7 @@ namespace RobotWarsConsole
                     }
                 });
                 Console.WriteLine("");
-                System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(400);
             }
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"{war.Robots.SingleOrDefault(r => r.Health > 0).Name} Wins! :)");
