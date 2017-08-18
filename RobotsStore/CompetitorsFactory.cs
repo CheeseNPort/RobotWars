@@ -17,8 +17,7 @@ namespace RobotsStore
                     new CompassionateRobot(),
                     new LazyRobot(),
                     new StupidRobot(),
-                    new VeryStupidRobot(),
-                    new MisterGutsy()
+                    new VeryStupidRobot()
             };
         }
     }
