@@ -22,7 +22,7 @@ namespace RobotWarsTests
                 Wins = 0
             }).ToList();
 
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 5000; i++)
             {
                 var robotsOut = new List<Guid>();
                 var war = new Mediator(robots);
@@ -46,7 +46,7 @@ namespace RobotWarsTests
                 results.SingleOrDefault(r => r.Name == winningRobot.Name).Wins++;
             }
 
-            var a = results.OrderByDescending(r => r.Wins).ToList();
+            results = results.OrderByDescending(r => r.Wins).ToList();
         }
     }
 
