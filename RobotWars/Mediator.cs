@@ -21,6 +21,13 @@ namespace RobotWars
                 LastTurn = DateTime.Now,
                 Name = r.GetName()
             }).ToList();
+            Robots.ForEach(r =>
+            {
+                if(Robots.Count(b => b.Name == r.Name) > 1)
+                {
+                    throw new Exception("Duplicate robots exist.");
+                }
+            });
             RandomizeStartOrder();
         }
 
