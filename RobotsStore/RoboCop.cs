@@ -25,29 +25,31 @@ namespace RobotsStore.Robots
             var previousAttacks = attacks;
             while (attacks > 0)
             {
+
                 if (previousAttacks == attacks)
                 {
-                    competitors.ForEach(c =>
-                    {
-                        c.Attacks++;
-                        attacks--;
-                    });
+                    robotsToIgnore = new List<String>();
+                }
+
+                var rnd = new Random();
+                if (competitors.Count > 2)
+                {
+                    var index = rnd.Next(competitors.Count - 3);
+                    competitors[index + 1].Attacks = attacks;
+                    attacks = 0;
                 }
                 else
                 {
-                    competitors.ForEach(c =>
-                    {
-                        if (!robotsToIgnore.Contains(c.Name))
-                        {
-                            c.Attacks++;
-                            attacks--;
-                        }
-                    });
+                    var index = rnd.Next(competitors.Count - 1);
+                    competitors[index].Attacks = attacks;
+                    attacks = 0;
                 }
+
                 previousAttacks = attacks;
             }
             return competitors;
         }
+
 
         public void UpdateHealth(Int64 health)
         {
