@@ -19,32 +19,43 @@ namespace RobotsStore.Robots
         {
             RobotAction victim;
             var attacksLeft = 10;
+            competitors = competitors.Where(c => c.Name != "Cheating Robot" && c.Name != "Very Stupid Robot" && c.Name != "Stupid Robot").ToList();
             if (competitors.Where(c => c.Health < 50).FirstOrDefault() != null)
             {
-                victim = competitors.Where(c => c.Health < 50).OrderByDescending(d => d.Health).FirstOrDefault();
-                if (victim.Health < 10)
+                victim = competitors.Where(c => c.Health <= 10).OrderBy(d => d.Health).FirstOrDefault();
+                if (victim != null)
                 {
-                    victim.Attacks = victim.Health;
+                    if (victim.Health < 10)
+                    {
+                        victim.Attacks = victim.Health;
+                    }
+                    else
+                    {
+                        victim.Attacks = attacksLeft;
+                    }
                 }
                 else
                 {
-                    victim.Attacks = attacksLeft;
+                    victim = competitors.Where(c => c.Health > 10 && c.Health <= 20).OrderBy(d => d.Health).FirstOrDefault();
+                    victim.Attacks = victim.Health - 10;
+                    attacksLeft = 0;
                 }
+
                 attacksLeft -= (int)victim.Attacks;
             }
-            if (competitors.OrderBy(c => c.Health).FirstOrDefault().Name == GetName())
-            {
-                victim = competitors.OrderBy(c => c.Health).Where(c => c.Name != GetName()).FirstOrDefault();
-                if (victim.Health < 10)
-                {
-                    victim.Attacks = victim.Health;
-                }
-                else
-                {
-                    victim.Attacks = attacksLeft;
-                }
-                attacksLeft -= (int)victim.Attacks;
-            }
+            //if (competitors.OrderBy(c => c.Health).FirstOrDefault().Name == GetName())
+            //{
+            //    victim = competitors.OrderBy(c => c.Health).Where(c => c.Name != GetName()).FirstOrDefault();
+            //    if (victim.Health < 10)
+            //    {
+            //        victim.Attacks = victim.Health;
+            //    }
+            //    else
+            //    {
+            //        victim.Attacks = attacksLeft;
+            //    }
+            //    attacksLeft -= (int)victim.Attacks;
+            //}
 
             victim = competitors.OrderByDescending(c => c.Health).FirstOrDefault();
             victim.Attacks = attacksLeft;
