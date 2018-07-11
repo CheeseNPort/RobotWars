@@ -17,36 +17,37 @@ namespace RobotsStore.Robots
 
         public List<RobotAction> MyTurn(List<RobotAction> competitors)
         {
-            Int64 attacks = 10;
-            attacks = Attack("TwoLukesAreBetterThanOne Robot", competitors, attacks);
-            attacks = Attack("Scythe Robot", competitors, attacks);
-            attacks = Attack("Norbit", competitors, attacks);
-            attacks = Attack("Lazy Robot", competitors, attacks);
-            attacks = Attack("Stupid Robot", competitors, attacks);
-            attacks = Attack("Very Stupid Robot", competitors, attacks);
-            attacks = Attack("Cheating Robot", competitors, attacks);
-            return competitors;
-        }
-
-        private Int64 Attack(String name, List<RobotAction> robots, Int64 attacks)
-        {
-            if (attacks > 0)
+            var random = new Random();
+            var humanRobots = competitors.Where(c => (c.Name == "TwoLukesAreBetterThanOne Robot"
+            || c.Name == "Norbit"
+            || c.Name == "Scythe Robot") && c.Health > 0);
+            if(humanRobots.Any())
             {
-                var robot = robots.SingleOrDefault(r => r.Name == name);
-                if (robot != null)
+                var victim = humanRobots.ToList()[random.Next(0, humanRobots.Count() - 1)];
+                var victimRobot = humanRobots.SingleOrDefault(r => r.Name == victim.Name);
+                victimRobot.Attacks = 30;
+            }
+            else
+            {
+                var computerRobots = competitors.Where(c => (c.Name != "Cheating Robot" && c.Health > 0));
+                if (computerRobots.Any())
                 {
-                    if (robot.Health > attacks)
+                    var victim = computerRobots.ToList()[random.Next(0, computerRobots.Count() - 1)];
+                    var victimRobot = computerRobots.SingleOrDefault(r => r.Name == victim.Name);
+                    victimRobot.Attacks = 30;
+                }
+                else
+                {
+                    var otherRobots = competitors.Where(c =>  c.Health > 0);
+                    if (otherRobots.Any())
                     {
-                        robot.Attacks = attacks;
+                        var victim = otherRobots.ToList()[random.Next(0, otherRobots.Count() - 1)];
+                        var victimRobot = otherRobots.SingleOrDefault(r => r.Name == victim.Name);
+                        victimRobot.Attacks = 30;
                     }
-                    else
-                    {
-                        robot.Attacks = robot.Health;
-                    }
-                    return attacks = robot.Attacks;
                 }
             }
-            return attacks;
+            return competitors;
         }
 
         public void UpdateHealth(Int64 health)
