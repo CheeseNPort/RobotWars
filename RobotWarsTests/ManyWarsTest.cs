@@ -17,7 +17,7 @@ namespace RobotWarsTests
             var robots = CompetitorsFactory.GetCompetitors();
 
             var twoLuke = new TwoLukesAreBetterThanOne();
-            Assert.AreEqual("TwoLukesAreBetterThanOne", twoLuke.GetName());
+            Assert.AreEqual("TwoLukesAreBetterThanOne Robot", twoLuke.GetName());
 
             var robo = new RoboCop();
             Assert.AreEqual("RoboCop", robo.GetName());
