@@ -1,6 +1,7 @@
 ﻿using RobotWars;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace RobotsStore
@@ -15,10 +16,28 @@ namespace RobotsStore
 
         public List<RobotAction> MyTurn(List<RobotAction> competitors)
         {
+            long possibleAttacks = 10;
+            var newVictim = competitors.OrderBy(c => c.Health).FirstOrDefault();
             competitors.ForEach(c =>
             {
-                c.Attacks = 3;
+                if (c.Name == "TwoLukesAreBetterThanOne" && c.Health > Health)
+                {
+                    c.Attacks = possibleAttacks;
+                    possibleAttacks = 0;
+                }
+                /*   if (c.Name == "CheatingRobot" && c.Health > Health)
+                    {
+                        !c.Attacks
+                    }*/
+                if (c.Health > Health && c.Name == newVictim.Name)
+                {
+                    newVictim.Attacks = possibleAttacks;
+                    possibleAttacks = 0;
+                }
             });
+
+            var victim = competitors.OrderByDescending(c => c.Health).FirstOrDefault();
+            victim.Attacks = possibleAttacks;
             return competitors;
         }
 
