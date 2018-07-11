@@ -17,19 +17,22 @@ namespace RobotsStore.Robots
 
         public List<RobotAction> MyTurn(List<RobotAction> competitors)
         {
-            long leftover = 0;
             var robotsToIgnore = new List<String>
             {
                 "Cheating Robot", "Very Stupid Robot", "Stupid Robot"
             };
 
 
-            long possibleAttacks = 10;
+            long possibleAttacks = 30;
             var newVictim = competitors.OrderBy(c => c.Health).FirstOrDefault();
             competitors.ForEach(c =>
             {
-             
-                if (c.Health > Health && c.Name == newVictim.Name && Math.Abs(c.Health - Health) >= 9)
+             if (c.Name == "Compassionate Robot" && c.Health == 100)
+                {
+                    c.Attacks = possibleAttacks;
+                    possibleAttacks = 0;
+                }
+                if (c.Health > Health && c.Name == newVictim.Name && Math.Abs(c.Health - Health) >= 29)
                 {
                     newVictim.Attacks = possibleAttacks;
                     possibleAttacks = 0;
@@ -39,7 +42,7 @@ namespace RobotsStore.Robots
             var victim = competitors.OrderByDescending(c => c.Health).FirstOrDefault();
 
 
-            if (weakVictim.Health <= 10)
+            if (weakVictim.Health <= 30 && possibleAttacks != 0)
             {
                 long tempAttack = weakVictim.Health;
                 
