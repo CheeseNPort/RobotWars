@@ -19,6 +19,7 @@ namespace RobotsStore
                     new StupidRobot(),
                     new VeryStupidRobot(),
                     new RoboCop()
+                    new TwoLukesAreBetterThanOne()
             };
         }
     }
