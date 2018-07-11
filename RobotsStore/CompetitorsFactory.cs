@@ -20,6 +20,7 @@ namespace RobotsStore
                     new VeryStupidRobot(),
                     new RoboCop(),
                     new Norbit(),
+                    new ScytheRobot(),
                     new TwoLukesAreBetterThanOne()
             };
         }
