@@ -20,13 +20,8 @@ namespace RobotsStore
         {
             var random = new Random();
             var victim = competitors[random.Next(0, competitors.Count - 1)];
-            victim.Attacks = 10;
+            victim.Attacks = 30;
 
-            if (victim.Name != "Cheating Robot" || competitors.Count(c => c.Health > 0) == 1)
-            {
-                victim.Attacks = attacks;
-
-            }
             return competitors;
         }
     
