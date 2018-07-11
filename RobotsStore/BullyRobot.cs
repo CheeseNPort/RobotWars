@@ -17,8 +17,8 @@ namespace RobotsStore.Robots
 
         public List<RobotAction> MyTurn(List<RobotAction> competitors)
         {
-            var victim = competitors.OrderBy(c => c.Health).FirstOrDefault();
-            victim.Attacks = 10;
+            var target = competitors.OrderBy(c => c.Health).FirstOrDefault();
+            target.Attacks = 10;
             return competitors;
         }
 
