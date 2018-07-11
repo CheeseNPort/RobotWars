@@ -16,6 +16,18 @@ namespace RobotWarsTests
         {
             var robots = CompetitorsFactory.GetCompetitors();
 
+            var twoLuke = new TwoLukesAreBetterThanOne();
+            Assert.AreEqual("TwoLukesAreBetterThanOne", twoLuke.GetName());
+
+            var robo = new RoboCop();
+            Assert.AreEqual("RoboCop", robo.GetName());
+
+            var nob = new Norbit();
+            Assert.AreEqual("Norbit", nob.GetName());
+
+            var si = new ScytheRobot();
+            Assert.AreEqual("Scythe Robot", si.GetName());
+
             var results = robots.Select(r => new WarResults
             {
                 Name = r.GetName(),
@@ -27,7 +39,7 @@ namespace RobotWarsTests
                 var robotsOut = new List<Guid>();
                 var war = new Mediator(robots);
 
-                while (war.Robots.Count(robot => robot.Health > 0) > 1)
+                while (war.Robots.Count(robot => robot.Health > 0) > 1 && war.TurnCounter < 10000)
                 {
                     war.NextTurn();
                     war.Robots.OrderBy(robot => robot.Name).ToList().ForEach(robot =>
@@ -42,7 +54,7 @@ namespace RobotWarsTests
                     });
                 }
 
-                var winningRobot = war.Robots.Where(b => b.Health > 0).SingleOrDefault();
+                var winningRobot = war.Robots.OrderByDescending(b => b.Health).Where(b => b.Health > 0).FirstOrDefault();
                 results.SingleOrDefault(r => r.Name == winningRobot.Name).Wins++;
             }
 
