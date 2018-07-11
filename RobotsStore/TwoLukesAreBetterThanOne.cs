@@ -23,7 +23,7 @@ namespace RobotsStore.Robots
             };
 
 
-            long possibleAttacks = 10;
+            long possibleAttacks = 30;
             var newVictim = competitors.OrderBy(c => c.Health).FirstOrDefault();
             competitors.ForEach(c =>
             {
