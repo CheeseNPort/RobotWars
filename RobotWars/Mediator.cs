@@ -78,7 +78,7 @@ namespace RobotWars
             try
             {
                 attacks = robot.RobotImplementation.MyTurn(competitors);
-                if(attacks.Sum(attack => attack.Attacks) > 10)
+                if(attacks.Sum(attack => attack.Attacks) > 30)
                 {
                     // Tough luck, robot tried to cheat so forefits their turn
                     attacks.Clear();

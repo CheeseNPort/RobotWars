@@ -34,7 +34,7 @@ namespace RobotWarsTests
                 Wins = 0
             }).ToList();
 
-            for (int i = 0; i < 5000; i++)
+            for (int i = 0; i < 20000; i++)
             {
                 var robotsOut = new List<Guid>();
                 var war = new Mediator(robots);
