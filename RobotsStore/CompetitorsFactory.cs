@@ -18,6 +18,9 @@ namespace RobotsStore
                     new LazyRobot(),
                     new StupidRobot(),
                     new VeryStupidRobot(),
+                    new RoboCop(),
+                    new Norbit(),
+                    new ScytheRobot(),
                     new TwoLukesAreBetterThanOne()
             };
         }
