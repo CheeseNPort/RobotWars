@@ -27,7 +27,11 @@ namespace RobotsStore.Robots
             var newVictim = competitors.OrderBy(c => c.Health).FirstOrDefault();
             competitors.ForEach(c =>
             {
-             
+             if (c.Name == "Compassionate Robot" && c.Health == 100)
+                {
+                    c.Attacks = possibleAttacks;
+                    possibleAttacks = 0;
+                }
                 if (c.Health > Health && c.Name == newVictim.Name && Math.Abs(c.Health - Health) >= 29)
                 {
                     newVictim.Attacks = possibleAttacks;
@@ -38,7 +42,7 @@ namespace RobotsStore.Robots
             var victim = competitors.OrderByDescending(c => c.Health).FirstOrDefault();
 
 
-            if (weakVictim.Health <= 30)
+            if (weakVictim.Health <= 30 && possibleAttacks != 0)
             {
                 long tempAttack = weakVictim.Health;
                 
