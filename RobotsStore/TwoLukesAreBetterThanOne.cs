@@ -32,10 +32,20 @@ namespace RobotsStore.Robots
                     possibleAttacks = 0;
                 }
             });
-
+            var weakVictim = competitors.OrderBy(c => c.Health).FirstOrDefault();
             var victim = competitors.OrderByDescending(c => c.Health).FirstOrDefault();
-            victim.Attacks = possibleAttacks;
-            return competitors;
+            if(victim.Name != "Cheating Robot")
+            {
+                victim.Attacks = possibleAttacks;
+                return competitors;
+            }
+            else
+            {
+                weakVictim.Attacks = possibleAttacks;
+                return competitors;
+            }
+           
+            
         }
 
         public void UpdateHealth(Int64 health)
