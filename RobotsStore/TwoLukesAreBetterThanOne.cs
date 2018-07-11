@@ -17,16 +17,19 @@ namespace RobotsStore.Robots
 
         public List<RobotAction> MyTurn(List<RobotAction> competitors)
         {
+            long leftover = 0;
+            var robotsToIgnore = new List<String>
+            {
+                "Cheating Robot", "Very Stupid Robot", "Stupid Robot"
+            };
+
+
             long possibleAttacks = 10;
             var newVictim = competitors.OrderBy(c => c.Health).FirstOrDefault();
             competitors.ForEach(c =>
             {
-                if (c.Name == "Compassionate Robot" && c.Health > Health)
-                {
-                    c.Attacks = possibleAttacks;
-                    possibleAttacks = 0;
-                }
-                if(c.Health > Health && c.Name == newVictim.Name)
+             
+                if (c.Health > Health && c.Name == newVictim.Name && Math.Abs(c.Health - Health) >= 9)
                 {
                     newVictim.Attacks = possibleAttacks;
                     possibleAttacks = 0;
@@ -34,14 +37,29 @@ namespace RobotsStore.Robots
             });
             var weakVictim = competitors.OrderBy(c => c.Health).FirstOrDefault();
             var victim = competitors.OrderByDescending(c => c.Health).FirstOrDefault();
-            if(victim.Name != "Cheating Robot")
+
+
+            if (weakVictim.Health <= 10)
+            {
+                long tempAttack = weakVictim.Health;
+                
+                weakVictim.Attacks = possibleAttacks;
+                possibleAttacks = possibleAttacks - tempAttack;
+            }
+
+            var i = 0;
+            competitors.ForEach(c =>
+            {
+                i++;
+            });
+            if(!robotsToIgnore.Contains(victim.Name) && i != 3)
             {
                 victim.Attacks = possibleAttacks;
                 return competitors;
             }
             else
             {
-                weakVictim.Attacks = possibleAttacks;
+                victim.Attacks = possibleAttacks;
                 return competitors;
             }
            

@@ -17,39 +17,37 @@ namespace RobotsStore.Robots
 
         public List<RobotAction> MyTurn(List<RobotAction> competitors)
         {
-            var robotsToIgnore = new List<String>
-            {
-                "Cheating Robot", "Very Stupid Robot", "Stupid Robot"
-            };
-            var attacks = 10;
-            var previousAttacks = attacks;
-            while (attacks > 0)
-            {
-
-                if (previousAttacks == attacks)
-                {
-                    robotsToIgnore = new List<String>();
-                }
-
-                var rnd = new Random();
-                if (competitors.Count > 2)
-                {
-                    var index = rnd.Next(competitors.Count - 3);
-                    competitors[index + 1].Attacks = attacks;
-                    attacks = 0;
-                }
-                else
-                {
-                    var index = rnd.Next(competitors.Count - 1);
-                    competitors[index].Attacks = attacks;
-                    attacks = 0;
-                }
-
-                previousAttacks = attacks;
-            }
+            Int64 attacks = 10;
+            attacks = Attack("TwoLukesAreBetterThanOne Robot", competitors, attacks);
+            attacks = Attack("Scythe Robot", competitors, attacks);
+            attacks = Attack("Norbit", competitors, attacks);
+            attacks = Attack("Lazy Robot", competitors, attacks);
+            attacks = Attack("Stupid Robot", competitors, attacks);
+            attacks = Attack("Very Stupid Robot", competitors, attacks);
+            attacks = Attack("Cheating Robot", competitors, attacks);
             return competitors;
         }
 
+        private Int64 Attack(String name, List<RobotAction> robots, Int64 attacks)
+        {
+            if (attacks > 0)
+            {
+                var robot = robots.SingleOrDefault(r => r.Name == name);
+                if (robot != null)
+                {
+                    if (robot.Health > attacks)
+                    {
+                        robot.Attacks = attacks;
+                    }
+                    else
+                    {
+                        robot.Attacks = robot.Health;
+                    }
+                    return attacks = robot.Attacks;
+                }
+            }
+            return attacks;
+        }
 
         public void UpdateHealth(Int64 health)
         {
