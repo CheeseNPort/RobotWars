@@ -12,7 +12,7 @@ namespace RobotsStore.Robots
 
         public string GetName()
         {
-            return "TwoLukesAreBetterThanOne";
+            return "TwoLukesAreBetterThanOne Robot";
         }
 
         public List<RobotAction> MyTurn(List<RobotAction> competitors)
