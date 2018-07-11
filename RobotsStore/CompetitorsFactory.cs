@@ -12,10 +12,10 @@ namespace RobotsStore
         {
             return new List<IRobot>()
             {
-                    new BullyRobot(),
+                  new BullyRobot(),
                     new CheatingRobot(),
                     new CompassionateRobot(),
-                    new LazyRobot(),
+                   new LazyRobot(),
                     new StupidRobot(),
                     new VeryStupidRobot(),
                     new RoboCop(),

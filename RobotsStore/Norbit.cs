@@ -8,6 +8,8 @@ namespace RobotsStore
 {
     public class Norbit : IRobot
     {
+        private long attacks;
+
         public Int64 Health { get; set; }
         public string GetName()
         {
@@ -16,32 +18,21 @@ namespace RobotsStore
 
         public List<RobotAction> MyTurn(List<RobotAction> competitors)
         {
-            long possibleAttacks = 10;
-            var newVictim = competitors.OrderBy(c => c.Health).FirstOrDefault();
-            competitors.ForEach(c =>
-            {
-                if (c.Name == "TwoLukesAreBetterThanOne" && c.Health > Health)
-                {
-                    c.Attacks = possibleAttacks;
-                    possibleAttacks = 0;
-                }
-                /*   if (c.Name == "CheatingRobot" && c.Health > Health)
-                    {
-                        !c.Attacks
-                    }*/
-                if (c.Health > Health && c.Name == newVictim.Name)
-                {
-                    newVictim.Attacks = possibleAttacks;
-                    possibleAttacks = 0;
-                }
-            });
+            var random = new Random();
+            var victim = competitors[random.Next(0, competitors.Count - 1)];
+            victim.Attacks = 10;
 
-            var victim = competitors.OrderByDescending(c => c.Health).FirstOrDefault();
-            victim.Attacks = possibleAttacks;
+            if (victim.Name != "Cheating Robot" || competitors.Count(c => c.Health > 0) == 1)
+            {
+                victim.Attacks = attacks;
+
+            }
             return competitors;
         }
+    
 
-        public void UpdateHealth(long health)
+
+        public void UpdateHealth(Int64 health)
         {
             Health = health;
         }
